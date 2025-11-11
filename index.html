@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepa K - Full Stack Developer (MERN)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2docx/1.0.4/html2docx.js"></script>
+    <style>
+        /* A4 Page Dimensions */
+        @page {
+        size: A4;
+        margin: 0;
+        }
+
+        html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0 auto;
+        background: #f5f5f5;
+        }
+
+        @media print {
+    /* ... other styles ... */
+        .sidebar {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .tech-tag {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        }
+         /* ADD or make sure this is in your CSS */
+        @media print {
+            body {
+                background: white;
+                padding: 0; /* Important: Remove padding for print */
+                margin: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                width: 100%; /* Match A4 page width */
+                height: 100%; /* Match A4 page height */
+                margin: 0;
+            }
+            /* ... existing color-adjust rules ... */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'sans-serif', Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+ 
+        .resume-container {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            position: relative;
+            overflow: hidden;
+        }
+        
+ 
+/* previousle used */
+ :root {
+  --primary: #1E88E5;            
+  --primary-light: #64B5F6;     
+  --primary-dark: #0D47A1;      
+  --accent: #2E2E2E;            
+  --light-bg: #FAFAFB;          
+  --sidebar-bg: var(--primary-dark);
+  --sidebar-text: #FFFFFF;
+}
+ 
+        /* Left Sidebar */
+        .sidebar {
+            background: linear-gradient(135deg, var(--sidebar-bg), var(--primary-dark));
+            color: var(--sidebar-text);
+            padding: 50px 10px 20px 25px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        
+        .title {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .contact-item a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+        
+        .contact-item i {
+            width: 12px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+        }
+        
+        /* Sidebar Section Titles - FIXED */
+        .sidebar .section-title {
+            font-size: 17px;
+            color: white !important;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5) !important;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .sidebar .section-title i {
+            color: white !important;
+            font-size: 13px;
+        }
+        
+        .sidebar .category-title {
+            font-weight: 600;
+            color: white !important;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+        
+        .sidebar .category-title i {
+            color: white !important;
+            font-size: 13px;
+        }
+        
+        /* Right Content */
+        .content {
+            padding: 35px 25px;
+            background: white;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        /* Section Styles */
+        .section {
+             margin-bottom: 10px;
+        }
+        
+        .content .section-title {
+            font-size: 17px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .content .section-title i {
+            color: var(--primary);
+            font-size: 13px;
+        }
+        
+        /* Summary Section */
+        .summary {
+            line-height: 1.5;
+            color: #555;
+            text-align: justify;
+            font-size: 12.5px;
+        }
+        
+        /* Experience Section */
+        .experience-item, .project-item {
+            margin-bottom: 16px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #eaeaea;
+        }
+        
+        .experience-item:last-child, .project-item:last-child {
+            border-bottom: none;
+        }
+        
+        .job-header, .project-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .job-title, .project-title {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 14px;
+        }
+        
+        .company, .project-period {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 12px;
+        }
+        
+        
+         .period {
+            background-color: #f0f8f8;
+            color: 666;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            border-left: 2px solid rgba(255, 255, 255, 0.9);
+        }
+        .job-description, .project-description {
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 5px;
+        }
+        
+        .tech-tag {
+            background: var(--primary-dark);
+            color: white;
+            padding: 3.5px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        /* Education Section */
+        .education-item {
+            margin-bottom: 12px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(255, 255, 255, 0.7);
+        }
+        
+        .degree {
+            font-weight: 600;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .institution {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            margin: 2px 0;
+        }
+        
+        .education-details {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+        }
+        
+        /* Skills Section */
+        .skills-category {
+            margin-bottom: 12px;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            border-left: 2px solid rgba(255, 255, 255, 0.5);
+        }
+       
+        /* Certifications */
+        .certification-item {
+            margin-bottom: 5px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .certification-item:before {
+            content: "▸";
+            color: white;
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+        }
+        
+        /* Decorative Elements */
+        .accent-bar {
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin-bottom: 12px;
+        }
+        html, body {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  background: #f5f5f5;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            
+            .sidebar {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .tech-tag {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        /* Download Button */
+        .download-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            font-weight: 500;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <h1 class="name">Deepa K</h1>
+                <h2 class="title">Full Stack Developer (MERN)</h2>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:deepayasodha1@gmail.com">deepayasodha1@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 70102 17319</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Madurai, India</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <a href="https://deepa-k.netlify.app" target="_blank">deepa-k.netlify.app</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="http://linkedin.com/in/deepa-k-a56a74115" target="_blank">linkedin.com/in/deepa-k-a56a74115
+</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/deepa-codes " target="_blank">github.com/deepa-codes</a>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </h3>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Science (Computer Science)</div>
+                    <div class="institution">EMG Yadava Women's College, Madurai</div>
+                    <div class="education-details">Graduated: 2016 &nbsp;|&nbsp; Secured 74% (CGPA: 7.8) &nbsp;|&nbsp; No history of arrears </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Technical Skills
+                </h3>
+                
+                <div class="skills-category">
+                    <div class="category-title">
+                        <i class="fas fa-palette"></i>
+                        Frontend
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-tag">React js</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">Redux</span>
+                        <span class="skill-tag">Tailwind</span>
+                        <span class="skill-tag">Material UI</span>
+                        <span class="skill-tag">React Bootstrap</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="category-title">
+                        <i class="fas fa-server"></i>
+                        Backend
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Nest.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">JWT</span>
+                        <span class="skill-tag">OAuth</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="category-title">
+                        <i class="fas fa-tools"></i>
+                        Tools & Workflow
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="category-title">
+                        <i class="fas fa-robot"></i>
+                        AI & Automation
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">AI-Assisted Coding</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="category-title">
+                        <i class="fas fa-vial"></i>
+                        Testing
+                    </div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Jest</span>
+                        <span class="skill-tag">React Testing Library</span>
+                        <span class="skill-tag">Postman</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-award"></i>
+                    Certifications
+                </h3>
+                <div class="certification-item"><strong style="font-weight: 600;"> Frontend Developer (React) Certificate </strong> - HackerRank | 
+                    <a href="https://www.hackerrank.com/certificates/d43d31f651ac" style="color:white;text-decoration: none;font-weight: 600;"  target="_blank"> Verify Link <i style="font-size: 10.5px;" class="fa fa-external-link "></i></a></div>
+
+                <div class="certification-item"><strong  style="font-weight: 600;"> Career Essentials in GitHub Certificate </strong> - LinkedIn Learning & GitHub |  
+                    <a style="color:white;text-decoration: none;font-weight: 600;" href="https://www.linkedin.com/learning/certificates/237ddbf44042432be27b54a0e7bfcd0b08fbc82815c5ef42955e125390504e23" target="_blank"> Verify Link <i  style="font-size: 10.5px;" class="fa fa-external-link "></i></a>
+                </div>
+
+                <div class="certification-item"><strong style="font-weight: 600;"> Generative AI Mastermind Certificate </strong> - Outskills</div>
+                <div class="certification-item"><strong style="font-weight: 600;"> The Ultimate React Course </strong> - Udemy</div>
+            </div>
+        </div>
+        
+        <!-- Right Content -->
+        <div class="content">
+            <!-- <div class="accent-bar"></div> -->
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Professional Summary
+                </h2>
+                <p class="summary">
+                    Full Stack Developer specializing in the MERN stack, <strong style="font-weight: 500;">4+ years</strong> of overall development experience. Skilled in React Js, Node.js, Express, and MongoDB, with a strong focus on crafting scalable, maintainable, and user-centric applications.
+                </p>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Work Experience
+                </h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title">Programmer</div>
+                        <div class="period">Aug 2024 – Jun 2025</div>
+                    </div>
+                    <div class="company">OSIZ Technologies Pvt Ltd (Koinpark) | Madurai</div>
+                    <p class="job-description">
+                        Developed and maintained core modules for a multi-panel crypto exchange platform.
+                        Collaborated with cross-functional teams to enhance UI and backend integration.
+                    </p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title">Associate Software Engineer</div>
+                        <div class="period">May 2023 – Jul 2024</div>
+                    </div>
+                    <div class="company">Techno Genesis Software Solutions Pvt Ltd | Madurai</div>
+                    <p class="job-description">
+                        Designed and optimized reusable React components.
+                        Supported full lifecycle development of multiple web applications.
+                    </p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title">Software Developer</div>
+                        <div class="period">Aug 2016 – Jun 2018</div>
+                    </div>
+                    <div class="company">Techno Genesis Software Solutions Pvt Ltd | Madurai</div>
+                    <p class="job-description">
+                        Built responsive interfaces and managed database connectivity for enterprise apps.
+                        Participated in client requirement analysis and code reviews.
+                    </p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    Projects
+                </h2>
+                
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title">Koinpark Crypto Currency Exchange & Admin Panel</div>
+                        <!-- <div class="project-period">Aug 2024 – Jun 2025</div> -->
+                    </div>
+                    <div class="project-header">
+                        <div class="project-title"></div>
+                        <div class="project-period">Aug 2024 – Jun 2025</div>
+                    </div>
+                    <p class="project-description">
+                        Multi-panel crypto exchange system with Admin, Support, OTC, and CRM.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React Js</span>
+                        <span class="tech-tag">Node</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">CoreUI</span>
+                        <span class="tech-tag">Material UI</span>
+                        <span class="tech-tag">Bootstrap</span>
+                        <span class="tech-tag">Redux</span>
+                        <span class="tech-tag">Git</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title">Puppy's Bakery E-Commerce App</div>
+                        <div class="project-period">Jan 2023 – Apr 2024</div>
+                    </div>
+                    <p class="project-description">
+                        Dual portal for customers and admins with real-time product management.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React Js</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">Git</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title">Accupayd NSDL Banking Application</div>
+                        <div class="project-period">Aug 2023 – Jan 2024</div>
+                    </div>
+                    <p class="project-description">
+                        Secure banking app enabling transactions, beneficiaries, and account management.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React Js</span>
+                        <span class="tech-tag">NestJS</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">React Bootstrap</span>
+                        <span class="tech-tag">Git</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title">Nimalaan Energies Web Application</div>
+                        <div class="project-period">Aug 2023 – Jan 2024</div>
+                    </div>
+                    <p class="project-description">
+                        Responsive web platform with job portal, enquiry forms, and admin dashboard.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React Js</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Redux</span>
+                        <span class="tech-tag">Material UI</span>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Declaration
+                </h2>
+                
+                <div class="project-item">
+                    <div class="project-description">
+                        I hereby declare that all information provided is true to the best of my knowledge.
+                </div>
+        </div>
+    </div>
+ 
+</body>
+</html>
